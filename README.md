@@ -12,12 +12,12 @@ This is a complete PostgreSQL database system for a SACCO (Savings and Credit Co
 
 ## Tasks Completed
 
-### Task 1: Table Creation ✓
+### Task 1: Table Creation 
 - 6 tables with proper constraints
 - Foreign keys with CASCADE/RESTRICT rules
 - Check constraints for validation
 
-### Task 2: Sample Data ✓
+### Task 2: Sample Data 
 - 5 Members with Rwandan names and addresses
 - 5 Officers across Rwandan branches
 - 5 Loan Accounts in RWF
@@ -25,20 +25,20 @@ This is a complete PostgreSQL database system for a SACCO (Savings and Credit Co
 - 5 Claims
 - 5 Payments
 
-### Task 3: Active Policies Query ✓
+### Task 3: Active Policies Query 
 Retrieves all active insurance policies with member details and RWF formatting
 
-### Task 4: Update Claim Status ✓
+### Task 4: Update Claim Status 
 Updates claim status to 'Settled' after payment processing
 
-### Task 5: Multiple Policies ✓
+### Task 5: Multiple Policies 
 Identifies members with more than one insurance policy
 
-### Task 6: Premium Collection Views ✓
+### Task 6: Premium Collection Views 
 Three views created:
 - `vw_MonthlyPremiumCollection` - Monthly aggregation
 - `vw_MonthlyPremiumSummary` - Formatted summary with RWF
 - `vw_YearlyPremiumComparison` - Year-over-year comparison
 
-### Task 7: Auto-Expire Trigger ✓
+### Task 7: Auto-Expire Trigger 
 Automatically updates policy status to 'Expired' when EndDate is reached
