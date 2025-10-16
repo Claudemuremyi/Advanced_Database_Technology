@@ -1,6 +1,6 @@
 # SACCO Insurance and Member Extension System
 
-## Overview
+## Description
 This is a complete PostgreSQL database system for a SACCO (Savings and Credit Cooperative) operating in Rwanda. The system manages member profiles, loan accounts, insurance policies, claims, and payments across multiple branches in Rwanda.
 
 ### Database Structure
@@ -9,41 +9,6 @@ This is a complete PostgreSQL database system for a SACCO (Savings and Credit Co
 - ON DELETE CASCADE between Claim → Payment
 - Check constraints for data validation
 - Indexes for performance
-
-## Files Structure
-
-\`\`\`
-scripts/
-├── 00_master_setup.sql            # ⭐ RECOMMENDED: Complete setup in one script
-├── 01_create_tables.sql           # Table creation with constraints
-├── 02_insert_data.sql             # Sample data with Rwandan context
-├── 03_query_active_policies.sql   # Task 3: Active policies query
-├── 04_update_claim_status.sql     # Task 4: Update claim status
-├── 05_multiple_policies.sql       # Task 5: Members with multiple policies
-├── 06_create_views.sql            # Task 6: Monthly premium views
-├── 07_create_trigger.sql          # Task 7: Auto-expire policy trigger
-├── 08_bonus_queries.sql           # Additional analysis queries
-└── 09_verification.sql            # Verification and testing
-\`\`\`
-
-
-1. **Create Database**
-   \`\`\`sql
-   CREATE DATABASE sacco;
-   \`\`\`
-
-2. **Connect to Database**
-   - Open pgAdmin 4
-   - Select the `sacco` database
-
-3. **Run Scripts in Order** 
-   - `01_create_tables.sql` - Creates all tables
-   - `02_insert_data.sql` - Inserts sample Rwandan data
-   - `03_query_active_policies.sql` - Query active policies
-   - `04_update_claim_status.sql` - Update claim statuses
-   - `05_multiple_policies.sql` - Find members with multiple policies
-   - `06_create_views.sql` - Create premium collection views
-   - `07_create_trigger.sql` - Create auto-expire trigger
 
 ## Tasks Completed
 
