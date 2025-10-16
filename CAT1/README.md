@@ -170,7 +170,3 @@ All query results and database structure screenshots are available in the `Scree
 5. **Views Output** - Monthly and yearly premium reports
 6. **Trigger Testing** - Auto-expiration demonstration
 7. **CASCADE DELETE Demo** - Before/after deletion states
-
-
-
-
