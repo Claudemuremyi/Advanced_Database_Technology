@@ -6,17 +6,16 @@
 
 ## 📋 Project Information
 
-- **Author:** Claude Nshimyumuremyi
-- **Country:** Rwanda 🇷🇼
+- **Full Name:** Claude Nshimyumuremyi
 - **Institution:** [Your University/Institution Name]
 - **Course:** Advanced Database Technology
-- **Assessment:** Continuous Assessment Test 1 (CAT1)
-- **Database Systems:** PostgreSQL (pgAdmin 4) & Oracle SQL Developer
-- **Date:** January 2025
+- **Assessment:** CAT1
+- **Database Systems:** PostgreSQL (pgAdmin 4)
+- **Date:** 16th January 2025
 
 ---
 
-## 🎯 Project Objective
+## Project Objective
 
 This project implements a comprehensive **SACCO Insurance and Member Extension System** for Rwandan financial cooperatives. The system tracks:
 
@@ -27,7 +26,7 @@ This project implements a comprehensive **SACCO Insurance and Member Extension S
 - Payment tracking with multiple methods
 
 The database design demonstrates advanced SQL concepts including:
-- Complex table relationships (1:1, 1:N)
+- Table's relationships (1:1, 1:N)
 - CASCADE DELETE constraints
 - Triggers for automatic policy expiration
 - Views for premium collection analysis
@@ -37,6 +36,15 @@ The database design demonstrates advanced SQL concepts including:
 
 ## 🗄️ Database Schema
 
+1. Member(MemberID, FullName, Gender, Contact, Address, JoinDate)
+2. Officer(OfficerID, FullName, Branch, Contact, Role)
+3. LoanAccount(LoanID, MemberID, OfficerID, Amount, InterestRate,
+StartDate, Status)
+4. InsurancePolicy(PolicyID, MemberID, Type, Premium, StartDate, EndDate,
+Status)
+5. Claim(ClaimID, PolicyID, DateFiled, AmountClaimed, Status)
+6. Payment(PaymentID, ClaimID, Amount, PaymentDate, Method)
+   
 ### Tables Created
 
 1. **Member** - Stores SACCO member profiles
@@ -65,7 +73,6 @@ Claim (1) ──→ (1) Payment [CASCADE DELETE]
 - ✅ Primary keys (SERIAL auto-increment)
 - ✅ Foreign keys with CASCADE/RESTRICT rules
 - ✅ CHECK constraints for data validation
-- ✅ Indexes for query optimization
 
 ### Task 2: Sample Data
 - ✅ 5 Rwandan members with realistic data
@@ -99,71 +106,7 @@ Claim (1) ──→ (1) Payment [CASCADE DELETE]
 - ✅ Trigger fires on INSERT and UPDATE
 - ✅ Stored procedure for batch expiration
 
-### Bonus: CASCADE DELETE Testing
-- ✅ Demonstrates ON DELETE CASCADE between Claim → Payment
-- ✅ Verification queries with before/after states
-
 ---
-
-## 🚀 How to Run the SQL Scripts
-
-### Prerequisites
-
-- **PostgreSQL** installed (version 12 or higher)
-- **pgAdmin 4** or any PostgreSQL client
-- Basic knowledge of SQL
-
-### Installation Steps
-
-#### Option 1: Run Master Setup Script (Recommended)
-
-\`\`\`sql
--- 1. Create the database
-CREATE DATABASE sacco;
-
--- 2. Connect to the database in pgAdmin 4
-
--- 3. Run the master setup script
-\i 'path/to/00_master_setup.sql'
-\`\`\`
-
-#### Option 2: Run Scripts Individually
-
-\`\`\`sql
--- Step 1: Create tables
-\i '01_create_tables.sql'
-
--- Step 2: Insert sample data
-\i '02_insert_data.sql'
-
--- Step 3: Run queries
-\i '03_query_active_policies.sql'
-\i '04_update_claim_status.sql'
-\i '05_multiple_policies.sql'
-
--- Step 4: Create views
-\i '06_create_views.sql'
-
--- Step 5: Create trigger
-\i '07_create_trigger.sql'
-
--- Step 6: Test CASCADE DELETE
-\i 'test_cascade_simple.sql'
-
--- Step 7: Verify installation
-\i '09_verification.sql'
-\`\`\`
-
-### For Oracle SQL Developer
-
-Oracle-compatible scripts are available in the `Oracle_Postgres_Code/Oracle/` folder with syntax adjustments for:
-- Sequence creation instead of SERIAL
-- VARCHAR2 instead of VARCHAR
-- Different date functions
-- Oracle-specific trigger syntax
-
----
-
 ## 📂 Project Structure
 
 \`\`\`
