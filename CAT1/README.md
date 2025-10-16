@@ -4,10 +4,9 @@
 
 ---
 
-## 📋 Project Information
+## Project Information
 
 - **Full Name:** Claude Nshimyumuremyi
-- **Institution:** [Your University/Institution Name]
 - **Course:** Advanced Database Technology
 - **Assessment:** CAT1
 - **Database Systems:** PostgreSQL (pgAdmin 4)
@@ -34,7 +33,7 @@ The database design demonstrates advanced SQL concepts including:
 
 ---
 
-## 🗄️ Database Schema
+## Database Schema
 
 1. Member(MemberID, FullName, Gender, Contact, Address, JoinDate)
 2. Officer(OfficerID, FullName, Branch, Contact, Role)
@@ -66,48 +65,48 @@ Claim (1) ──→ (1) Payment [CASCADE DELETE]
 
 ---
 
-## ✨ Key Features Implemented
+## Key Features Implemented
 
 ### Task 1: Database Design
-- ✅ Six normalized tables with proper constraints
-- ✅ Primary keys (SERIAL auto-increment)
-- ✅ Foreign keys with CASCADE/RESTRICT rules
-- ✅ CHECK constraints for data validation
+- Six normalized tables with proper constraints
+- Primary keys (SERIAL auto-increment)
+- Foreign keys with CASCADE/RESTRICT rules
+- CHECK constraints for data validation
 
 ### Task 2: Sample Data
-- ✅ 5 Rwandan members with realistic data
-- ✅ 5 officers across Rwandan branches (Kigali, Musanze, Huye, Rubavu, Nyagatare)
-- ✅ 5 loan accounts with varying amounts
-- ✅ 5 insurance policies (multiple types)
-- ✅ 5 claims with different statuses
-- ✅ 5 payments using various methods
+- 5 Rwandan members with realistic data
+- 5 officers across Rwandan branches (Kigali, Musanze, Huye, Rubavu, Nyagatare)
+- 5 loan accounts with varying amounts
+- 5 insurance policies (multiple types)
+- 5 claims with different statuses
+- 5 payments using various methods
 
 ### Task 3: Active Policies Query
-- ✅ Retrieves all active insurance policies
-- ✅ Displays member information and policy details
-- ✅ Calculates policy duration in months
+- Retrieves all active insurance policies
+- Displays member information and policy details
+- Calculates policy duration in months
 
 ### Task 4: Claim Status Updates
-- ✅ Updates claims to 'Settled' after payment
-- ✅ Validates payment existence before update
+- Updates claims to 'Settled' after payment
+- Validates payment existence before update
 
 ### Task 5: Multiple Policies Analysis
-- ✅ Identifies members with multiple insurance policies
-- ✅ Aggregates total premium amounts
-- ✅ Lists all policy types per member
+- Identifies members with multiple insurance policies
+- Aggregates total premium amounts
+- Lists all policy types per member
 
 ### Task 6: Premium Collection Views
-- ✅ Monthly premium aggregation view
-- ✅ Yearly comparison view
-- ✅ Formatted currency display (RWF)
+- Monthly premium aggregation view
+- Yearly comparison view
+- Formatted currency display (RWF)
 
 ### Task 7: Auto-Expiration Trigger
-- ✅ Automatically expires policies when EndDate is reached
-- ✅ Trigger fires on INSERT and UPDATE
-- ✅ Stored procedure for batch expiration
+- Automatically expires policies when EndDate is reached
+- Trigger fires on INSERT and UPDATE
+- Stored procedure for batch expiration
 
 ---
-## 📂 Project Structure
+## Project Structure
 
 \`\`\`
 CAT1/
@@ -137,36 +136,7 @@ CAT1/
     └── 07_cascade_delete_demo.png
 \`\`\`
 
----
-
-## 📊 Sample Queries
-
-### View All Members
-\`\`\`sql
-SELECT * FROM Member ORDER BY JoinDate DESC;
-\`\`\`
-
-### Check Active Policies
-\`\`\`sql
-SELECT * FROM vw_MonthlyPremiumCollection;
-\`\`\`
-
-### Test Trigger
-\`\`\`sql
--- Insert expired policy (should auto-expire)
-INSERT INTO InsurancePolicy (MemberID, Type, Premium, StartDate, EndDate, Status)
-VALUES (1, 'Health', 180000.00, '2022-01-01', '2023-01-01', 'Active');
-\`\`\`
-
-### Test CASCADE DELETE
-\`\`\`sql
--- Delete a claim (payment should be deleted automatically)
-DELETE FROM Claim WHERE ClaimID = 2;
-\`\`\`
-
----
-
-## 🔍 Key SQL Concepts Demonstrated
+## Key SQL Concepts Demonstrated
 
 | Concept | Implementation |
 |---------|---------------|
@@ -180,27 +150,16 @@ DELETE FROM Claim WHERE ClaimID = 2;
 | **Subqueries** | Nested SELECT for updates |
 | **Transactions** | COMMIT/ROLLBACK for data integrity |
 
----
-
-## 🧪 Testing & Verification
-
-Run the verification script to ensure everything is set up correctly:
-
-\`\`\`sql
-\i '09_verification.sql'
-\`\`\`
 
 Expected output:
-- ✅ 6 tables created
-- ✅ All foreign keys properly configured
-- ✅ CASCADE DELETE verified on Payment → Claim
-- ✅ 3 views created
-- ✅ 1 trigger active
-- ✅ Sample data inserted (5+ records per table)
+- 6 tables created
+- All foreign keys properly configured
+- CASCADE DELETE verified on Payment → Claim
+- 3 views created
+- 1 trigger active
+- Sample data inserted (5+ records per table)
 
----
-
-## 📸 Screenshots
+## Screenshots
 
 All query results and database structure screenshots are available in the `Screenshots/` folder:
 
@@ -212,57 +171,6 @@ All query results and database structure screenshots are available in the `Scree
 6. **Trigger Testing** - Auto-expiration demonstration
 7. **CASCADE DELETE Demo** - Before/after deletion states
 
----
 
-## 🛠️ Technologies Used
 
-- **Database:** PostgreSQL 16
-- **Client Tool:** pgAdmin 4
-- **SQL Standard:** SQL:2016
-- **Version Control:** Git & GitHub
-- **Documentation:** Markdown
 
----
-
-## 📝 Notes
-
-- All monetary values are in **Rwandan Francs (RWF)**
-- Phone numbers follow Rwanda format: `+2507XXXXXXXX`
-- Branches represent actual Rwandan districts
-- Sample data uses authentic Rwandan names
-- The system is designed for educational purposes
-
----
-
-## 🤝 Contributing
-
-This is an academic project for CAT1 assessment. For questions or suggestions:
-
-- **GitHub:** [@Claudemuremyi](https://github.com/Claudemuremyi)
-- **Repository:** [Advanced_Database_Technology](https://github.com/Claudemuremyi/Advanced_Database_Technology)
-
----
-
-## 📄 License
-
-This project is created for educational purposes as part of the Advanced Database Technology course.
-
----
-
-## 🎓 Learning Outcomes
-
-By completing this project, I demonstrated proficiency in:
-
-✅ Database design and normalization  
-✅ Complex SQL query writing  
-✅ Constraint implementation and enforcement  
-✅ Trigger creation and testing  
-✅ View design for reporting  
-✅ CASCADE DELETE relationships  
-✅ Data integrity and validation  
-✅ PostgreSQL-specific features  
-
----
-
-**Last Updated:** January 2025  
-**Status:** ✅ Completed and Tested
