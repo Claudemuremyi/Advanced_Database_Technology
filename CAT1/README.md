@@ -110,22 +110,16 @@ Claim (1) ──→ (1) Payment [CASCADE DELETE]
 
 \`\`\`
 CAT1/
-├── README.md                          # This file
-├── Oracle_Postgres_Code/
+├── README.md 
 │   ├── PostgreSQL/
-│   │   ├── 00_master_setup.sql       # Complete setup in one file
-│   │   ├── 01_create_tables.sql      # Table definitions
-│   │   ├── 02_insert_data.sql        # Sample data insertion
+│   │   ├── 00_Schema.sql 
+│   │   ├── 01_create_tables.sql
+│   │   ├── 02_insert_data.sql
 │   │   ├── 03_query_active_policies.sql
 │   │   ├── 04_update_claim_status.sql
 │   │   ├── 05_multiple_policies.sql
 │   │   ├── 06_create_views.sql
 │   │   ├── 07_create_trigger.sql
-│   │   ├── 08_bonus_queries.sql
-│   │   ├── 09_verification.sql
-│   │   └── test_cascade_simple.sql   # CASCADE DELETE demo
-│   └── Oracle/
-│       └── [Oracle-compatible versions]
 └── Screenshots/
     ├── 01_table_structure.png
     ├── 02_sample_data.png
