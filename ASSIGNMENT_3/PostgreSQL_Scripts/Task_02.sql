@@ -1,12 +1,10 @@
 -- TASK 2: DATABASE LINKS SIMULATION USING POSTGRES_FDW
---------------------------------------------------------
+-------------------------------------------------------
 -- Desctiption: Simulate distributed database access using Foreign Data Wrappers (FDW)
--- This is PostgreSQL's equivalent to Oracle's database links
 --------------------------------------------------------------------------------------
 
 -- STEP 1: Enable postgres_fdw extension
-------------------------------------------
-
+-----------------------------------------
 -- Create extension if not exists
 CREATE EXTENSION IF NOT EXISTS postgres_fdw;
 
@@ -21,7 +19,6 @@ DROP SERVER IF EXISTS musanze_server CASCADE;
 DROP SERVER IF EXISTS kigali_server CASCADE;
 
 -- Create foreign server for Musanze branch (simulating remote connection)
--- In production, this would point to a different host/port
 CREATE SERVER musanze_server
     FOREIGN DATA WRAPPER postgres_fdw
     OPTIONS (host 'localhost', port '5432', dbname 'sacco');
@@ -36,7 +33,6 @@ CREATE SERVER kigali_server
 ---------------------------------------------------
 
 -- Map current user to foreign servers
--- Replace 'postgres' with your actual PostgreSQL username if different
 CREATE USER MAPPING IF NOT EXISTS FOR CURRENT_USER
     SERVER musanze_server
     OPTIONS (user 'postgres', password 'postgres');
@@ -46,7 +42,7 @@ CREATE USER MAPPING IF NOT EXISTS FOR CURRENT_USER
     OPTIONS (user 'postgres', password 'postgres');
 
 -- STEP 4: Create foreign tables in Kigali schema (accessing Musanze data)
----------------------------------------------------------------------------
+--------------------------------------------------------------------------
 
 -- Create foreign table to access Musanze members from Kigali
 CREATE FOREIGN TABLE branch_kigali.remote_musanze_members (
@@ -129,40 +125,7 @@ ORDER BY MemberID;
 -- STEP 7: DISTRIBUTED JOIN QUERIES
 ------------------------------------
 
--- Distributed Join 1: Combine all members from both branches
-SELECT 
-    'ALL SACCO MEMBERS (DISTRIBUTED)' AS Report_Title,
-    Branch,
-    COUNT(*) AS Member_Count,
-    STRING_AGG(FullName, ', ') AS Members
-FROM (
-    -- Local Kigali members
-    SELECT MemberID, FullName, Branch FROM branch_kigali.Member
-    UNION ALL
-    -- Remote Musanze members via FDW
-    SELECT MemberID, FullName, Branch FROM branch_kigali.remote_musanze_members
-) AS all_members
-GROUP BY Branch
-ORDER BY Branch;
-
--- Distributed Join 2: Total loan portfolio across both branches
-SELECT 
-    'DISTRIBUTED LOAN PORTFOLIO' AS Report_Title,
-    'Kigali' AS Branch,
-    COUNT(*) AS Total_Loans,
-    SUM(Amount) AS Total_Amount,
-    AVG(InterestRate) AS Avg_Interest_Rate
-FROM branch_kigali.LoanAccount
-UNION ALL
-SELECT 
-    'DISTRIBUTED LOAN PORTFOLIO',
-    'Musanze',
-    COUNT(*),
-    SUM(Amount),
-    AVG(InterestRate)
-FROM branch_kigali.remote_musanze_loans;
-
--- Distributed Join 3: Cross-branch member and loan analysis
+-- Distributed Join: Cross-branch member and loan analysis
 SELECT 
     m.Branch,
     m.FullName,
@@ -183,35 +146,3 @@ LEFT JOIN (
     SELECT MemberID, Amount, InterestRate, Status FROM branch_kigali.remote_musanze_loans
 ) AS l ON m.MemberID = l.MemberID
 ORDER BY m.Branch, m.FullName;
-
--- STEP 8: Performance analysis of distributed queries
--------------------------------------------------------
-
--- Analyze local query performance
-EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
-SELECT COUNT(*), SUM(Amount) 
-FROM branch_kigali.LoanAccount;
-
--- Analyze distributed query performance (with FDW)
-EXPLAIN (ANALYZE, BUFFERS, VERBOSE)
-SELECT COUNT(*), SUM(Amount) 
-FROM branch_kigali.remote_musanze_loans;
-
--- STEP 9: Testing the Queries
-------------------------------------
-
--- List all foreign servers
-SELECT 
-    srvname AS server_name,
-    srvoptions AS server_options
-FROM pg_foreign_server
-WHERE srvname IN ('kigali_server', 'musanze_server');
-
--- List all foreign tables
-SELECT 
-    foreign_table_schema,
-    foreign_table_name,
-    foreign_server_name
-FROM information_schema.foreign_tables
-WHERE foreign_table_schema IN ('branch_kigali', 'branch_musanze')
-ORDER BY foreign_table_schema, foreign_table_name;
