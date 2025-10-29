@@ -362,17 +362,10 @@ EXCEPTION WHEN others THEN RAISE NOTICE 'Expected error caught'; ROLLBACK;
 \`\`\`
 Tests enforcement by attempting to set quantity to 10 (exceeds limit of 5), catches error, and rolls back.
 
-\`\`\`sql
+sql
 UPDATE node_a.orderdetail_a SET quantity = 3 WHERE detailid = 1;
-\`\`\`
+
 Demonstrates successful update with quantity = 3 (within limit of 5), which passes validation and commits.
 
----
 
-## Summary
-
-**A1-A5:** Distributed database techniques (fragmentation, remote queries, parallel processing, two-phase commit, lock management)  
-**B6-B10:** Data integrity and business logic (constraints, triggers, recursive queries, knowledge inference, business rules)
-
-All scripts work with small datasets (≤10 rows) for educational purposes while demonstrating real-world database patterns.
 
