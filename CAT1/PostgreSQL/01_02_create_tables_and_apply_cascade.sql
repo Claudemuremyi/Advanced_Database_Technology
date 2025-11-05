@@ -1,18 +1,15 @@
--- STUDENT 31 – SACCO INSURANCE AND MEMBER EXTENSION SYSTEM
--- Database: sacco
--- ==================================================================
--- Connect to the sacco database before running the following scripts
-
-DROP TABLE IF EXISTS Payment CASCADE;
-DROP TABLE IF EXISTS Claim CASCADE;
-DROP TABLE IF EXISTS InsurancePolicy CASCADE;
-DROP TABLE IF EXISTS LoanAccount CASCADE;
-DROP TABLE IF EXISTS Officer CASCADE;
-DROP TABLE IF EXISTS Member CASCADE;
+-- SACCO INSURANCE AND MEMBER EXTENSION SYSTEM - RWANDA
+-- Context: This SACCO operates in Rwanda, serving members across multiple branches
+--
+-- TASK 1: Define all six tables and their constraints
+-- TASK 2: Apply CASCADE DELETE between Claim → Payment (see Payment table definition)
+-- ====================================================================================
+-- Add database comment indicating Rwandan context
+COMMENT ON DATABASE sacco IS 'SACCO Insurance and Member Extension System operating in Rwanda';
 
 -- TABLE 1: Member
 -- Stores member profile information for Rwandan SACCO members
--- ===========================================================
+-- ============================================================
 CREATE TABLE Member (
     MemberID SERIAL PRIMARY KEY,
     FullName VARCHAR(100) NOT NULL,
@@ -25,7 +22,7 @@ CREATE TABLE Member (
 
 -- TABLE 2: Officer
 -- Stores SACCO officer information across Rwandan branches
--- ========================================================
+-- =========================================================
 CREATE TABLE Officer (
     OfficerID SERIAL PRIMARY KEY,
     FullName VARCHAR(100) NOT NULL,
@@ -37,7 +34,7 @@ CREATE TABLE Officer (
 
 -- TABLE 3: LoanAccount
 -- Tracks loan accounts linked to members and officers
--- ===================================================
+-- ====================================================
 CREATE TABLE LoanAccount (
     LoanID SERIAL PRIMARY KEY,
     MemberID INT NOT NULL,
@@ -55,7 +52,7 @@ CREATE TABLE LoanAccount (
 
 -- TABLE 4: InsurancePolicy
 -- Stores insurance policy details for Rwandan SACCO members
--- =========================================================
+-- ==========================================================
 CREATE TABLE InsurancePolicy (
     PolicyID SERIAL PRIMARY KEY,
     MemberID INT NOT NULL,
@@ -87,12 +84,11 @@ CREATE TABLE Claim (
 
 -- TABLE 6: Payment
 -- Records payments made for settled claims
--- Records payments for settled claims in RWF
 -- ON DELETE CASCADE: When a claim is deleted, its payment is also deleted
--- ========================================================================
+-- =========================================================================
 CREATE TABLE Payment (
     PaymentID SERIAL PRIMARY KEY,
-    ClaimID INT NOT NULL UNIQUE,
+    ClaimID INT NOT NULL UNIQUE, -- 1:1 relationship with Claim
     Amount DECIMAL(12, 2) NOT NULL CHECK (Amount > 0),
     PaymentDate DATE NOT NULL DEFAULT CURRENT_DATE,
     Method VARCHAR(30) NOT NULL 
@@ -100,3 +96,14 @@ CREATE TABLE Payment (
     CONSTRAINT fk_payment_claim FOREIGN KEY (ClaimID) 
         REFERENCES Claim(ClaimID) ON DELETE CASCADE
 );
+
+-- Create indexes for better query performance
+-- ============================================
+CREATE INDEX idx_loan_member ON LoanAccount(MemberID);
+CREATE INDEX idx_loan_officer ON LoanAccount(OfficerID);
+CREATE INDEX idx_policy_member ON InsurancePolicy(MemberID);
+CREATE INDEX idx_policy_status ON InsurancePolicy(Status);
+CREATE INDEX idx_claim_policy ON Claim(PolicyID);
+CREATE INDEX idx_claim_status ON Claim(Status);
+CREATE INDEX idx_payment_claim ON Payment(ClaimID);
+
