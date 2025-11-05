@@ -6,7 +6,6 @@ This assignment demonstrates **parallel and distributed database concepts** usin
 
 ## Quick Navigation
 
-- **Code and Scripts**: See [Code/README.md](Code/README.md) for detailed task documentation
 - **SQL Scripts**: Located in `Code/` directory
 - **Screenshots**: Located in `Screenshoots/` directory
 - **Reports**: Assignment reports and documentation in root directory
