@@ -81,7 +81,6 @@ Comprehensive performance benchmarking comparing centralized, parallel, and dist
 ASSIGNMENT_3/
 ├── README.md                              (This file)
 ├── Code/
-│   ├── README.md                          (Detailed task documentation)
 │   ├── Task_01.sql                        (Distributed Schema Design)
 │   ├── Task_02.sql                        (Database Links/FDW)
 │   ├── Task_03.sql                        (Parallel Query Execution)
