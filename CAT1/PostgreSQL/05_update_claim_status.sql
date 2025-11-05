@@ -1,4 +1,4 @@
--- Task 4: UPDATE CLAIM STATUS AFTER SETTLEMENT
+-- Task 5: UPDATE CLAIM STATUS AFTER SETTLEMENT
 -- Updates claim status to 'Settled' when payment is processed
 -- ============================================================
 -- Update all approved claims that have received payment
