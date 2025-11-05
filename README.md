@@ -6,8 +6,9 @@ This repository contains comprehensive database projects demonstrating advanced 
 - **Relational Database Design** (CAT 1)
 - **Parallel and Distributed Databases** (ASSIGNMENT_3)
 - **Intelligent Databases** (INTELIGENT DATABASE)
+- **Advanced Database Exam** (ADVANCED DATABASE EXAM)
 
-All projects are implemented using **PostgreSQL** with a **SACCO (Savings and Credit Cooperative) Insurance and Member Extension System** context in **Rwanda**.
+All projects are implemented using **PostgreSQL**. Most projects use a **SACCO (Savings and Credit Cooperative) Insurance and Member Extension System** context in **Rwanda**, while the exam project uses a **Restaurant Order and Billing Management System**.
 
 ---
 
@@ -25,10 +26,16 @@ Advanced_Database_Technology/
 │   ├── Code/                          (SQL scripts and README)
 │   ├── Screenshoots/                  (Task screenshots)
 │   └── [Report files]
-└── INTELIGENT DATABASE/               (Intelligent Database Concepts)
-    ├── README.md                      (Intelligent Database documentation)
-    ├── [Task SQL files]
-    └── Screenshoots/                  (Task screenshots)
+├── INTELIGENT DATABASE/               (Intelligent Database Concepts)
+│   ├── README.md                      (Intelligent Database documentation)
+│   ├── [Task SQL files]
+│   └── Screenshoots/                  (Task screenshots)
+└── ADVANCED DATABASE EXAM/            (Database Exam - Restaurant System)
+    ├── README.md                      (Exam documentation in restaurant-db-exam/)
+    ├── restaurant-db-exam/            (Main exam project with README)
+    ├── RESTAURANTDB/                  (SQL scripts)
+    ├── Screenshoots/                  (Task screenshots)
+    └── [Report files]
 ```
 
 ---
@@ -87,6 +94,32 @@ Advanced_Database_Technology/
 - Spatial databases (PostGIS)
 
 **See**: [INTELIGENT DATABASE/README.md](INTELIGENT%20DATABASE/README.md) for detailed documentation.
+
+---
+
+### 4. ADVANCED DATABASE EXAM - Restaurant Order and Billing System
+**Location**: `ADVANCED DATABASE EXAM/`
+
+**Description**: Comprehensive database exam project implementing a **Restaurant Order and Billing Management System** with distributed database operations and advanced database features.
+
+**Key Features**:
+- **Section A - Distributed Database Operations**:
+  - Horizontal fragmentation and fragment recombination
+  - Database links using postgres_fdw
+  - Parallel vs serial aggregation comparison
+  - Two-phase commit (2PC) and recovery
+  - Distributed lock conflict diagnosis
+  
+- **Section B - Advanced Database Features**:
+  - Declarative rules (constraints hardening)
+  - E-C-A triggers for denormalized totals
+  - Recursive CTE for hierarchical queries
+  - Knowledge base with triple store
+  - Business limit alerts with triggers
+
+**Database**: `restaurant` with Node_A and Node_B (simulated using postgres_fdw)
+
+**See**: [ADVANCED DATABASE EXAM/restaurant-db-exam/README.md](ADVANCED%20DATABASE%20EXAM/restaurant-db-exam/README.md) for detailed documentation.
 
 ---
 
@@ -152,6 +185,19 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 -- ... continue with remaining tasks
 ```
 
+#### ADVANCED DATABASE EXAM - Restaurant System
+```sql
+-- Create restaurant database
+CREATE DATABASE restaurant;
+\c restaurant
+
+-- Enable required extensions
+CREATE EXTENSION IF NOT EXISTS postgres_fdw;
+
+-- Navigate to ADVANCED DATABASE EXAM/restaurant-db-exam/scripts/
+-- See restaurant-db-exam/README.md for detailed execution instructions
+```
+
 ---
 
 ## Database Schema Overview
@@ -173,13 +219,20 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 
 ---
 
-## Context: Rwanda SACCO System
+## Context: Database Systems
 
-All projects are designed with a **Rwandan context**:
+### Rwanda SACCO System (CAT 1, ASSIGNMENT_3, INTELIGENT DATABASE)
+All main projects are designed with a **Rwandan context**:
 - **Locations**: Kigali, Musanze, Huye, Rubavu, Nyagatare
 - **Currency**: Rwandan Francs (RWF)
 - **Phone Format**: +250 7XX XXX XXX
 - **Realistic Data**: Rwandan names and addresses
+
+### Restaurant Order and Billing System (ADVANCED DATABASE EXAM)
+The exam project implements a **Restaurant Order and Billing Management System**:
+- **Context**: Restaurant operations with orders, menus, staff, and billing
+- **Database**: `restaurant` with distributed nodes (Node_A and Node_B)
+- **Focus**: Distributed database operations and advanced database features
 
 ---
 
@@ -221,6 +274,7 @@ All projects are designed with a **Rwandan context**:
 - **CAT 1**: `01_02_create_tables.sql`, `03_insert_data.sql`, etc.
 - **ASSIGNMENT_3**: `Task_01.sql`, `Task_02.sql`, etc.
 - **INTELIGENT DATABASE**: `Intelligent_Task_01_Constraints.sql`, etc.
+- **ADVANCED DATABASE EXAM**: `1_create_tables.sql`, `A1_fragment_recombine.sql`, `B6_constraints_hardening.sql`, etc.
 
 ### Documentation
 - Each directory contains a `README.md` with detailed task descriptions
@@ -279,6 +333,14 @@ GRANT ALL ON SCHEMA public TO your_user;
 - Verify trigger functionality
 - Test recursive queries
 - Validate spatial queries
+
+### ADVANCED DATABASE EXAM Verification
+- Verify fragment recombination (checksums)
+- Test distributed joins and queries
+- Compare parallel vs serial execution
+- Validate two-phase commit recovery
+- Test constraint hardening and triggers
+- Verify recursive queries and knowledge bases
 
 ---
 
