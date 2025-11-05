@@ -1,4 +1,4 @@
--- TASK 5: IDENTIFY MEMBERS WITH MULTIPLE INSURANCE POLICIES
+-- TASK 6: IDENTIFY MEMBERS WITH MULTIPLE INSURANCE POLICIES
 -- Lists SACCO members who have more than one insurance policy
 -- ============================================================================
 
